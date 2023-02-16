@@ -24,11 +24,8 @@ class ProfileTest {
     @Test
     public void matchAnswersFalseWhenMustMatchCriteriaNotMet(){
         //given
-        Answer profileAnswer = new Answer(question, Bool.FALSE); // 보너스 안줌
-        profile.add(profileAnswer);
-        Answer criteriaAnswer = new Answer(question, Bool.TRUE); // 보너스 필요
-        Criterion criterion = new Criterion(criteriaAnswer, Weight.MustMatch); //중요한 질문
-        criteria.add(criterion);
+        profile.add(new Answer(question, Bool.FALSE));
+        criteria.add(new Criterion(new Answer(question, Bool.TRUE), Weight.MustMatch));
         //when
         boolean matches = profile.matches(criteria);
         //then
@@ -38,11 +35,8 @@ class ProfileTest {
     @Test
     public void matchAnswersTrueForAnyDontCareCriteria(){
         //given
-        Answer profileAnswer = new Answer(question, Bool.FALSE);
-        profile.add(profileAnswer);
-        Answer criteriaAnswer = new Answer(question, Bool.TRUE);
-        Criterion criterion = new Criterion(criteriaAnswer, Weight.DontCare);
-        criteria.add(criterion);
+        profile.add(new Answer(question, Bool.FALSE));
+        criteria.add(new Criterion(new Answer(question, Bool.TRUE), Weight.DontCare));
         //when
         boolean matches = profile.matches(criteria);
         //then
